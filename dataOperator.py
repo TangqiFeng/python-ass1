@@ -27,8 +27,8 @@ class DataOperator:
             the content of the file downloaded
         '''
         # decode method here converts bytes to string
-        content=requests.get(url).content.decode('utf-8')
-        if content.startswith('<!DOCTYPE HTML'):
+        content=requests.get(url).content.decode("utf-8", "ignore")
+        if content.startswith('<!'):
             raise DownloadError(url)
         return content
     
@@ -143,7 +143,7 @@ class DataOperator:
     
 if __name__ == "__main__":
     # set up the urls and file locations
-    cork_air_url = 'https://cli.fusio.net/cli/climate_data/webdata/ml.csv'
+    cork_air_url = 'https://google.com'
     cork_air = 'cork_air.csv'
     cork_air_desc = 'cork_air_desc.csv'
     # as is known, the last desc line start with 'years,'
