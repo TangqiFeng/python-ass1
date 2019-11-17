@@ -2,7 +2,9 @@
 # This file defines a data operator class
 # import module requests
 import requests
-from error import Error, DownloadError
+from error import DownloadError
+import sys
+
 class DataOperator:
     '''
     This class contains a set of basic functions used for data operation:
@@ -43,7 +45,17 @@ class DataOperator:
         path : str
             specify the location where to save the file
         '''
-        open(path, 'w').write(content)
+        try:
+            open(path, 'w').write(content)
+        except FileNotFoundError:
+            print('Error:', path, 'does not exist')
+            sys.exit(0)
+        except IsADirectoryError:
+            print('Error', path, 'is a directory')
+            sys.exit(0)
+        except PermissionError:
+            print('Error: No permissions to read file', path)
+            sys.exit(0)
     
     def get_description(self, file, end=''):
         '''
@@ -63,19 +75,29 @@ class DataOperator:
         '''
         # initial a list to store description data
         desc_data = []
-        # read the file
-        with open(file, 'r') as file_data:
-            # loop each line to feed the desc_data
-            for line in file_data:
-                # check the line is/not end line
-                if not line.startswith(end):
-                    # append desc data to list desc_data
-                    desc_data.append(line)   
-                else:
-                    # append the last line to desc_data
-                    desc_data.append(line)
-                    # terminate the loop
-                    break
+        try:
+            # read the file
+            with open(file, 'r') as file_data:
+                # loop each line to feed the desc_data
+                for line in file_data:
+                    # check the line is/not end line
+                    if not line.startswith(end):
+                        # append desc data to list desc_data
+                        desc_data.append(line)   
+                    else:
+                        # append the last line to desc_data
+                        desc_data.append(line)
+                        # terminate the loop
+                        break
+        except FileNotFoundError:
+            print('Error:', file, 'does not exist')
+            sys.exit(0)
+        except IsADirectoryError:
+            print('Error', file, 'is a directory')
+            sys.exit(0)
+        except PermissionError:
+            print('Error: No permissions to read file', file)
+            sys.exit(0)
         print(f'{len(desc_data)} lines description data in the file')
         # return desx data as a string
         return ''.join(desc_data)
@@ -100,26 +122,36 @@ class DataOperator:
         '''
         # initial a list to store valid data
         data = []
-        # read the file
-        with open(file, 'r') as file_data:
-            # set a flag to indicate whether the line is needed 
-            # (between the start and the end line)
-            flag = False
-            # loop each line of the file
-            for line in file_data:
-                # check the line is/not start line
-                if line.startswith(start):
-                    # chenge flag to True, cause data is neede from this line
-                    flag = True
-                # check the line is/not end line
-                if line.startswith(end):
-                    # append the last line to data[]
-                    data.append(line)
-                    # chenge flag to False
-                    flag = False
-                if flag:
-                    # append the line to data[]
-                    data.append(line)
+        try:
+            # read the file
+            with open(file, 'r') as file_data:
+                # set a flag to indicate whether the line is needed 
+                # (between the start and the end line)
+                flag = False
+                # loop each line of the file
+                for line in file_data:
+                    # check the line is/not start line
+                    if line.startswith(start):
+                        # chenge flag to True, cause data is neede from this line
+                        flag = True
+                    # check the line is/not end line
+                    if line.startswith(end):
+                        # append the last line to data[]
+                        data.append(line)
+                        # chenge flag to False
+                        flag = False
+                    if flag:
+                        # append the line to data[]
+                        data.append(line)
+        except FileNotFoundError:
+            print('Error:', file, 'does not exist')
+            sys.exit(0)
+        except IsADirectoryError:
+            print('Error', file, 'is a directory')
+            sys.exit(0)
+        except PermissionError:
+            print('Error: No permissions to read file', file)
+            sys.exit(0)
         print(f'get {len(data)} lines data from the file -> {file}')
         # return data as a string
         return ''.join(data)
@@ -143,7 +175,7 @@ class DataOperator:
     
 if __name__ == "__main__":
     # set up the urls and file locations
-    cork_air_url = 'https://google.com'
+    cork_air_url = 'https://cli.fusio.net/cli/climate_data/webdata/mly3904.csv'
     cork_air = 'cork_air.csv'
     cork_air_desc = 'cork_air_desc.csv'
     # as is known, the last desc line start with 'years,'
