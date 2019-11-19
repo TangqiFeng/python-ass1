@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-# this module contains a set of custom exceptions
+'''
+this module contains a set of custom exceptions
+'''
 # ref: https://www.programiz.com/python-programming/user-defined-exception
 class Error(Exception):
     """Base class for other exceptions"""

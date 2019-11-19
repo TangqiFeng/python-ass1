@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
-# This module contains program setup function
+'''
+This module contains program base operations:
+    1. setup environment
+    2. database handle
+    3. data store
+    4. draw plots
+    5. linear Regression tech
+    6. main logic
+'''
 
 # import DataOperator, DataAnalyst
 from dataOperator import DataOperator
 from dataAnalyst import DataAnalyst
 from error import InputError
-import matplotlib as mpl
-mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import sqlite3
 import base64
@@ -461,7 +467,7 @@ def generate_data_for_year_value(attrs=[]):
 def estimate_coef(x, y): 
     '''
     use Least Squares technique to estimate coefficients for 
-    analysising.
+    analysis.
     
     Parameters
     ----------

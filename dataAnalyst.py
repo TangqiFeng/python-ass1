@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-# This file defines a data analyst class, each object stores all data from file
+'''
+This file defines a data analyst class, each object stores all data from file
+and functions for calculation
+'''
+
 import sys
 class DataAnalyst:
     '''
@@ -66,7 +70,7 @@ class DataAnalyst:
    
     def get_value_based_on_year(self, attrs=[], cal=''):
         '''
-        This method will calculate the max/min/meant attributes value 
+        This method will calculate the max/min/avg/med (median) attributes value 
         for each year.
         
         Parameters
@@ -120,8 +124,8 @@ class DataAnalyst:
     
     def get_value_based_on_year_with_month(self, attrs=[], cal=''):
         '''
-        This method will calculate the max/min attributes value devided 
-        by year. Fetch the walue with its month
+        This method will calculate the max/min attributes value divided by 
+        year. Fetch the value with its month
         
         Parameters
         ----------

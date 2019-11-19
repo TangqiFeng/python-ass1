@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file defines a data operator class
+'''
+This file defines a data operator class
+contains data operation functions
+1. download file
+2. save file
+3. separate data
+'''
+
 # import module requests
 import requests
 from error import DownloadError

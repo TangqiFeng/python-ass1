@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-# this module contains unit test for all functions in this program
+'''
+this module contains unit test for all functions in this program
+'''
+
 import lib
 import os.path
 import pytest

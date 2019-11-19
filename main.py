@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# This is the main program for the assisment.
-# an interactable program  to analys weather data from cork & shannon airports 
+'''
+This is the main program for the assisment.
+an interactable program  to analys weather data from cork & shannon airports 
+'''
 from lib import prepare_files, analysis_data, validate_input, linear_reg_analysis
 from error import InputError
-import matplotlib as mpl
-mpl.use('TkAgg')
 
 # initial data path
 cork_air_data = 'cork_air_data.csv'
